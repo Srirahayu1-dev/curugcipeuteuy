@@ -197,33 +197,49 @@ padding-bottom: 15px;
     </div>
 </div>
 
+<?php
+include 'koneksi.php';
+
+$id_pemesanan = htmlentities($_GET['id']);
+
+$sql = "SELECT * FROM pemesanan where id = '$id_pemesanan'";
+
+$query = mysqli_query($db,$sql);
+
+if(mysqli_num_rows($query)==0)
+{
+    echo 'tidak ada'; exit;
+}else{
+    $detail = mysqli_fetch_row($query);
+?>
+
 <main class="flex-shrink-0">
 	<div class="container">
 	  <form method="post" action="proses.php">
   <div class="card mt-2">
 	<div class="card-header bg-dark text-white  width: 20px">
-	  Form Pemesanan Camping Ground 
+	  Invoice Pemesanan #<?=$detail[0]?>
 	</div>
 	<div class="card-body">
 	  <div class="mb-3">
 		<label for="nama_pemesanan" class="form-label">Nama Lengkap</label>
-		<input type="text" class="form-control" id="nama_pemesanan" name="nama_pemesanan" placeholder="Nama Lengkap Sesuai Tanda Pengenal" required>
+        <p><?=$detail[1]?></p>
 	  </div>
 	  <div class="mb-3">
 		<label for="hp_pemesan" class="form-label">Nomor Handphone</label>
-		<input type="text" class="form-control" id="hp_pemesan" name="hp_pemesan" placeholder="Nomor Handphone 08..." required>
+        <p><?=$detail[2]?></p>
 	  </div>
 	  <div class="mb-3">
 		<label for="waktu_wisata" class="form-label">Waktu Mulai Camping</label>
-		<input type="date" class="form-control" id="waktu_wisata" name="waktu_wisata" placeholder="Waktu Mulai Perjalanan" required>
+        <p><?=$detail[3]?></p>
 	  </div>
 	  <div class="mb-3">
 		<label for="hari_wisata" class="form-label">Hari Camping</label>
-		<input type="number" class="form-control" id="hari_wisata" value="1" name="hari_wisata" placeholder="Jumlah Hari Perjalanan" required>
+        <p><?=$detail[4]?></p>
 	  </div>
 	  <div class="mb-3">
 		  <div class="form-check">
-			<input class="form-check-input" type="checkbox" name="paket_inap" value="1" id="paket_inap">
+			<input class="form-check-input" type="checkbox" name="paket_inap" value="1" id="paket_inap" <?=($detail[5]==1)?'checked':''?> disabled>
 			<label class="form-check-label" for="paket_inap">
 			  Tenda untuk 1-4 Orang (Rp. 170.000)
 			</label>
@@ -231,7 +247,7 @@ padding-bottom: 15px;
 	  </div>
 	  <div class="mb-3">
 		  <div class="form-check">
-			<input class="form-check-input" type="checkbox" name="paket_transport" value="1" id="paket_transport">
+			<input class="form-check-input" type="checkbox" name="paket_transport" value="1" id="paket_transport" <?=($detail[6]==1)?'checked':''?> disabled>
 			<label class="form-check-label" for="paket_transport">
 			  Tenda untuk 5-8 Orang (Rp. 350.000)
 			</label>
@@ -239,7 +255,7 @@ padding-bottom: 15px;
 	  </div>
 	  <div class="mb-3">
 		  <div class="form-check">
-			<input class="form-check-input" type="checkbox" name="paket_makan" value="1" id="paket_makan">
+			<input class="form-check-input" type="checkbox" name="paket_makan" value="1" id="paket_makan" <?=($detail[7]==1)?'checked':''?> disabled>
 			<label class="form-check-label" for="paket_makan">
 			  Tenda untuk 8-12 Orang (Rp. 550.000)
 			</label>
@@ -247,22 +263,21 @@ padding-bottom: 15px;
 	  </div>
 	  <div class="mb-3">
 		<label for="jumlah_peserta" class="form-label">Jumlah Peserta</label>
-		<input type="number" class="form-control" id="jumlah_peserta" value="1" name="jumlah_peserta" placeholder="Jumlah Hari Perjalanan" required>
+        <p><?=$detail[8]?></p>
 	  </div>
 	  <div class="mb-3">
 		<label for="harga" class="form-label">Harga Paket</label>
-		<input type="number" class="form-control" id="harga" name="harga" placeholder="Harga Paket Perjalanan" readonly>
+        <p><?=$detail[9]?></p>
 	  </div>
 	  <div class="mb-3">
 		<label for="total" class="form-label">Total Tagihan</label>
-		<input type="number" class="form-control" id="total" name="total" placeholder="Total Paket Perjalanan" readonly>
+        <p><?=$detail[10]?></p>
 	  </div>
 	</div>
 	<div class="card-footer">
-	  <input type="submit" class="btn btn-primary" value="Simpan">
-	  <input type="reset" class="btn btn-danger" value="Ulangi">
+        <a href="#" onclick="window.print()" class="btn btn-success">Cetak</a>
 	</div>
-  </div>
+  </div><?php } ?>
   <script>
   //tentukan konstanta biaya masing-masing
   const tenda_untuk_1_5_orang = 170000;

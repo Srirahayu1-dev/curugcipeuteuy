@@ -132,7 +132,7 @@
                             <h2>Camping Ground</h2>
                             <p>"Camping ground di Curug Cipeuteuy nyaman, asri, dan dekat air terjun, cocok untuk menikmati alam."</p>
                             <button style="margin-top: 10px; padding: 10px 20px; background-color: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                                <a href="pemesanan.html" style="color: white; text-decoration: none;">Pesan Sekarang</a>
+                                <a href="pemesanan.php" style="color: white; text-decoration: none;">Pesan Sekarang</a>
                             </button>
                         </div>
                     </div>
